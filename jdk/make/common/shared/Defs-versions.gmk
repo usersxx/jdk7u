@@ -177,12 +177,22 @@ endif
 # Mac specific
 ifeq ($(PLATFORM), macosx)
   REQUIRED_OS_NAME            = Darwin
-  REQUIRED_OS_VERSION         = 11.2
+  REQUIRED_OS_VERSION         = 9.0
   REQUIRED_OS_VARIANT_NAME    = MacOSX
-  REQUIRED_OS_VARIANT_VERSION = 10.7.2
-  REQUIRED_COMPILER_NAME      = GCC4
-  REQUIRED_COMPILER_VERSION   = GCC4
-  REQUIRED_CC_VER             = 4.2.1
+  REQUIRED_OS_VARIANT_VERSION = 10.5.0
+  ifeq ($(CC_VERSION),llvm)
+    REQUIRED_COMPILER_NAME      = llvm-gcc
+    REQUIRED_CC_VER             = 4.2.1
+  endif
+  ifeq ($(CC_VERSION),clang)
+    REQUIRED_COMPILER_NAME      = Clang
+    REQUIRED_CC_VER             = 5.0
+  endif
+  ifeq ($(CC_VERSION),gcc)
+    REQUIRED_COMPILER_NAME      = GCC4
+    REQUIRED_COMPILER_VERSION   = GCC4
+    REQUIRED_CC_VER             = 4.2.1
+  endif
 endif
 
 # Windows specific
@@ -213,7 +223,7 @@ endif
 # Generic
 REQUIRED_ANT_VER          = 1.7.1
 REQUIRED_BOOT_VER         = 1.6
-REQUIRED_FREETYPE_VERSION = 2.3.0
+REQUIRED_FREETYPE_VERSION = 2.0.0
 REQUIRED_MAKE_VER         = 3.81
 REQUIRED_UNZIP_VER        = 5.12
 REQUIRED_ZIP_VER          = 2.2
