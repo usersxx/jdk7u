@@ -180,7 +180,7 @@ DEVTOOLS_FT_DIR_EXISTS = $(shell \
   ifdef ALT_FREETYPE_LIB_PATH
     FREETYPE_LIB_PATH = $(ALT_FREETYPE_LIB_PATH)
     ifeq ($(PLATFORM), macosx)
-      USING_SYSTEM_FT_LIB=true
+      USING_SYSTEM_FT_LIB=false
     endif
     ifeq ($(PLATFORM), aix)
       USING_SYSTEM_FT_LIB=true
@@ -193,8 +193,10 @@ DEVTOOLS_FT_DIR_EXISTS = $(shell \
         FREETYPE_LIB_PATH = /usr/X11R6/lib
       else
         FREETYPE_LIB_PATH = /usr/lib
+      else
+        FREETYPE_LIB_PATH = /opt/local/lib
       endif
-      USING_SYSTEM_FT_LIB=true
+        USING_SYSTEM_FT_LIB=false
     endif
   endif 
 
@@ -208,6 +210,8 @@ DEVTOOLS_FT_DIR_EXISTS = $(shell \
         FREETYPE_HEADERS_PATH = /usr/X11R6/include
       else
         FREETYPE_HEADERS_PATH = /usr/include
+      else
+        FREETYPE_HEADERS_PATH = /opt/local/include
       endif
     endif
   endif
