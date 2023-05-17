@@ -147,6 +147,9 @@ ifeq ($(PLATFORM), windows)
     FREETYPE_LIB = $(LIB_LOCATION)/$(LIB_PREFIX)freetype.$(LIBRARY_SUFFIX)
     OTHER_LDLIBS += $(FREETYPE_LIB_PATH)/freetype.lib
 else 
+ifeq ($(PLATFORM), macosx)
+    FREETYPE_LIB = $(LIB_LOCATION)/$(LIB_PREFIX)freetype.6.$(LIBRARY_SUFFIX)
+endif
   ifeq ($(USING_SYSTEM_FT_LIB), false)
     FREETYPE_LIB = $(LIB_LOCATION)/$(LIB_PREFIX)freetype.$(LIBRARY_SUFFIX).6
   endif
@@ -195,7 +198,8 @@ else # PLATFORM
 #
 
 ifeq ($(PLATFORM), macosx)
-OTHER_INCLUDES += -I$(X11_PATH)/include
+OTHER_INCLUDES += -I/usr/include
+OTHER_INCLUDES += -I/opt/local/include
 OTHER_LDLIBS  += -lawt $(LIBM) $(LIBCXX)
  ifeq ($(OS_VENDOR),Apple)
    # XXXDARWIN Match BSD/Linux behavior -- the mawt.dylib symbols will
